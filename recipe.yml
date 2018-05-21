@@ -1,0 +1,58 @@
+name : Install Nginx with Let's Encrypt on Ubunutu 16.04
+desc : Recipe to secure Nginx with Let's Encrypt certificates on Ubuntu 16.04
+logo_url: https://raw.githubusercontent.com/tanmally/redis-install-fireworks/master/logo/redis.png
+tags:
+    - nginx
+    - Let's Encrypt
+    - install
+    - latest
+    - Ubunutu 16.04
+ 
+task:
+
+  - name: Install ngnix
+    cmd:
+        - export DEBIAN_FRONTEND=noninteractive
+        - apt-get -y update
+        - apt-get install -y nginx
+        - ufw allow 'Nginx HTTP'
+        - ufw allow 'Nginx HTTPS'
+        - ufw status
+        - systemctl status nginx
+        
+        
+ - name: Copy letsencrypt config file 
+    copy: 
+         src_file: nginx-conf/letsencrypt.conf
+         target_dir: /etc/nginx/snippets/
+         target_file_name : letsencrypt.conf
+         
+ - name: Copy ssl config file 
+    copy: 
+         src_file: nginx-conf/ssl.conf
+         target_dir: /etc/nginx/snippets/
+         target_file_name : ssl.conf
+         
+ - name: Copy domain config file 
+    copy: 
+         src_file: nginx-conf/domain.conf
+         target_dir: /etc/nginx/sites-enabled/
+         target_file_name : domain.conf     
+         
+  - name: Install Let's Encrypt certbot
+    cmd:
+        - export DEBIAN_FRONTEND=noninteractive
+        - mkdir -p /var/www/letsencrypt/.well-known/acme-challenge
+        - rm /etc/nginx/sites-enabled/default
+        - systemctl reload nginx
+        - apt-get install -y software-properties-common
+        - add-apt-repository -y ppa:certbot/certbot
+        - apt-get -y update
+        - apt-get install certbot
+        - certbot certonly --webroot --agree-tos --no-eff-email --email {{email}} -w /var/www/letsencrypt -d www.{{domain}} -d {{domain}}
+        - certbot renew --dry-run
+            
+          
+
+         
+  
