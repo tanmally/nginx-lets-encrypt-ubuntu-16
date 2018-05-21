@@ -1,6 +1,6 @@
 name : Install Nginx with Let's Encrypt on Ubunutu 16.04
 desc : Recipe to secure Nginx with Let's Encrypt certificates on Ubuntu 16.04
-logo_url: https://raw.githubusercontent.com/tanmally/redis-install-fireworks/master/logo/redis.png
+logo_url: https://raw.githubusercontent.com/tanmally/nginx-lets-encrypt-ubuntu-16/master/logo/ngnix-lets-encrypt-ubunut.png
 tags:
     - nginx
     - Let's Encrypt
