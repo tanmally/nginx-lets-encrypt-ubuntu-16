@@ -45,7 +45,7 @@ task:
     cmd:
         - export DEBIAN_FRONTEND=noninteractive
         - mkdir -p /var/www/letsencrypt/.well-known/acme-challenge
-        - rm /etc/nginx/sites-enabled/default
+        - rm -f /etc/nginx/sites-enabled/default
         - systemctl reload nginx
         - apt-get install -y software-properties-common
         - add-apt-repository -y ppa:certbot/certbot
