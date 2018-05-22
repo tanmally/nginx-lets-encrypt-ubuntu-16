@@ -18,7 +18,6 @@ task:
         - ufw allow 'Nginx HTTP'
         - ufw allow 'Nginx HTTPS'
         - ufw status
-        - systemctl status nginx
         
   - name: Copy letsencrypt config file 
     copy: 
