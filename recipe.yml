@@ -20,24 +20,26 @@ task:
         - ufw status
         - systemctl status nginx
         
-        
   - name: Copy letsencrypt config file 
     copy: 
          src_file: nginx-conf/letsencrypt.conf
          target_dir: /etc/nginx/snippets/
          target_file_name : letsencrypt.conf
+         create_target_dir_if_missing : true
          
   - name: Copy ssl config file 
     copy: 
          src_file: nginx-conf/ssl.conf
          target_dir: /etc/nginx/snippets/
          target_file_name : ssl.conf
+         create_target_dir_if_missing : true
          
   - name: Copy domain config file 
     copy: 
          src_file: nginx-conf/domain.conf
          target_dir: /etc/nginx/sites-enabled/
-         target_file_name : domain.conf     
+         target_file_name : domain.conf   
+         create_target_dir_if_missing : true         
          
   - name: Install Let's Encrypt certbot
     cmd:
