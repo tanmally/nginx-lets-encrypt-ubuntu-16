@@ -33,6 +33,8 @@ task:
          target_dir: /etc/nginx/snippets/
          target_file_name : ssl.conf
          create_target_dir_if_missing : true
+    vars: 
+        - domain
          
   - name: Copy domain config file 
     copy: 
