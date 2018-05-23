@@ -52,7 +52,7 @@ task:
         - add-apt-repository -y ppa:certbot/certbot
         - apt-get -y update
         - apt-get -y install certbot
-        - certbot certonly --webroot --agree-tos --no-eff-email --email {{email}} -w /var/www/letsencrypt -d www.{{domain}} -d {{domain}}
+        - certbot certonly --webroot --agree-tos --no-eff-email --email {{email}} -w /var/www/letsencrypt -d {{domain}}
         - certbot renew --dry-run
     vars: 
         - domain  
