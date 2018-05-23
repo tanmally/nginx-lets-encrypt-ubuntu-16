@@ -54,7 +54,9 @@ task:
         - apt-get -y install certbot
         - certbot certonly --webroot --agree-tos --no-eff-email --email {{email}} -w /var/www/letsencrypt -d www.{{domain}} -d {{domain}}
         - certbot renew --dry-run
-            
+    vars: 
+        - domain  
+        - email
           
 
          
