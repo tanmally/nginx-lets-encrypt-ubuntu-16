@@ -59,7 +59,7 @@ task:
         - domain  
         - email
         
-          - name: Copy domain config file 
+          
   - name: Copy https domain config file       
     copy: 
          src_file: nginx-conf/domain-https.conf
@@ -71,7 +71,7 @@ task:
         - local_app_port    
 
   - name: Restart Ngnix after https conf 
-     cmd:
+    cmd:
         - rm -f /etc/nginx/sites-enabled/domain.conf
         - systemctl reload nginx
   
