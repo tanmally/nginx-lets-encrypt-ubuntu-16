@@ -54,9 +54,28 @@ task:
         - apt-get -y install certbot
         - certbot certonly --webroot --agree-tos --no-eff-email --email {{email}} -w /var/www/letsencrypt -d {{domain}}
         - certbot renew --dry-run
+        
     vars: 
         - domain  
         - email
+        
+          - name: Copy domain config file 
+  - name: Copy https domain config file       
+    copy: 
+         src_file: nginx-conf/domain-https.conf
+         target_dir: /etc/nginx/sites-enabled/
+         target_file_name : domain-https.conf   
+         create_target_dir_if_missing : true 
+    vars: 
+        - domain  
+        - local_app_port    
+
+  - name: Restart Ngnix after https conf 
+     cmd:
+        - rm -f /etc/nginx/sites-enabled/domain.conf
+        - systemctl reload nginx
+  
+      
           
 
          
